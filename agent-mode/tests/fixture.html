@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Fixture page</title>
+<style>
+body{font:15px/1.5 -apple-system,sans-serif;margin:0;padding:24px;max-width:760px}
+.card{border:1px solid #ccc;border-radius:8px;padding:12px;margin:12px 0}
+.pointer{cursor:pointer;background:#eef;padding:6px;display:inline-block}
+#spacer{height:1400px}
+.hidden{display:none}
+</style></head><body>
+<nav><a href="#about" id="lnk">About us</a> <a href="#pricing">Pricing</a></nav>
+<h1>Fixture page</h1>
+<p>Some paragraph text that is not interactive.</p>
+<form id="f" onsubmit="event.preventDefault();document.getElementById('out').textContent='submitted:'+document.getElementById('email').value">
+  <label for="email">Email address</label><input id="email" name="email" type="email" placeholder="you@example.com">
+  <label for="pw">Password</label><input id="pw" name="password" type="password">
+  <label for="color">Colour</label>
+  <select id="color"><option value="r">Red</option><option value="g">Green</option><option value="b">Blue</option></select>
+  <label><input type="checkbox" id="agree"> I agree</label>
+  <textarea id="note" placeholder="Notes"></textarea>
+  <button type="submit" id="go">Send</button>
+  <button type="button" id="count" onclick="this.dataset.n=(+this.dataset.n||0)+1;this.textContent='Clicked '+this.dataset.n">Click me</button>
+</form>
+<div id="out"></div>
+<div class="pointer" id="div-btn" onclick="document.getElementById('out').textContent='div clicked'">Fake button</div>
+<div class="card hidden"><button>Invisible button</button></div>
+<div id="host"></div>
+<div id="editable" contenteditable="true">edit me</div>
+<div id="spacer"></div>
+<button id="bottom" onclick="console.log('bottom clicked');fetch('data:text/plain,hi?token=abc&x=1')">Bottom button</button>
+<script>
+var sr=document.getElementById('host').attachShadow({mode:'open'});
+var b=document.createElement('button');b.textContent='Shadow button';b.onclick=function(){document.getElementById('out').textContent='shadow clicked'};sr.appendChild(b);
+</script>
+</body></html>
